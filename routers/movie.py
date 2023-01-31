@@ -9,6 +9,7 @@ from models.movie import Movie as MovieModel
 from service.movie import MovieService
 from schemas.movie import Movie
 
+
 movie_router = APIRouter()
 
 
@@ -54,11 +55,11 @@ def update_movie(id:int,movie:Movie):
 
    
 
-@movie_router.delete('/movies/{id}',tags=['movies'])
-def delete_movie(id:int):
-        db = Session()
-        result = MovieService(db).get_movie(id)
-        if not result:
-            return JSONResponse(status_code=404,content={"message":"No found"})
-        return JSONResponse(content="Delete movie", status_code=200)
-    
+@movie_router.delete('/movies/{id}', tags=['movies'], response_model=dict, status_code=200)
+def delete_movie(id: int)-> dict:
+    db = Session()
+    result: MovieModel = db.query(MovieModel).filter(MovieModel.id == id).first()
+    if not result:
+        return JSONResponse(status_code=404, content={"message": "No se encontró"})
+    MovieService(db).delete_movie(id)
+    return JSONResponse(status_code=200, content={"message": "Se ha eliminado la película"})

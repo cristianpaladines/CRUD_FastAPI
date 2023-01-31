@@ -12,6 +12,9 @@ from routers.movie import movie_router
 from routers.user import user_router
 from routers.actor import actor_router
 from routers.movie_cast import movie_cast_router
+from routers.genres import genres_router
+from routers.movie_genre import movie_genre_route
+from routers.director import director_router
 
 app = FastAPI()
 app.title = "Mi app con FastAPI"
@@ -22,14 +25,20 @@ app.include_router(movie_router)
 app.include_router(user_router)
 app.include_router(actor_router)
 app.include_router(movie_cast_router)
+app.include_router(genres_router)
+app.include_router(movie_genre_route)
+app.include_router(director_router)
 
 
 
 Base.metadata.create_all(bind=engine)
 
-@app.get('/',tags=['home'])
 
-
+@app.get('/',tags=['home'],status_code=200)
 def message():
     return HTMLResponse('<h1>Hello World</h1>')
+
+@app.get('/hola',tags=['home'])
+def hola():
+    return HTMLResponse('<h1>Hola Clase</h1>')
 
