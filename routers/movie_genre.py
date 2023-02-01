@@ -1,7 +1,5 @@
-from typing import Optional
-from fastapi import APIRouter,Path, Query, Depends
-from pydantic import BaseModel, Field
-from fastapi.responses import  JSONResponse, HTMLResponse
+from fastapi import APIRouter
+from fastapi.responses import  JSONResponse
 from fastapi.encoders import jsonable_encoder
 
 from config.database import Session
@@ -19,4 +17,6 @@ def get_movie_genre():
 @movie_genre_route.post('/movie_genre',tags=['movie_genre'])
 def create_movie_genre(movier_genre:MovieGenre):
     db = Session()
-    return
+    return JSONResponse(content={"message":"Se ha registrado el genero de la pelicula"},status_code=201)
+
+ 

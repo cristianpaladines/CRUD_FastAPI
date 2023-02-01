@@ -1,7 +1,5 @@
-from sqlalchemy import Column, ForeignKey ,Integer, String, Float,Date
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column,Integer, String, Float
 
-from models.moviecast import MovieCast
 from config.database import Base
 
 
@@ -17,7 +15,6 @@ class Movie(Base):
     date_release = Column(String)
     release_contry = Column(String)
 
-    #movie_casts = relationship("MovieCast", back_populates = "movies")
 
 
 
