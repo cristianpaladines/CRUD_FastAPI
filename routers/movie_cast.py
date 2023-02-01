@@ -1,4 +1,3 @@
-from typing import Optional
 from fastapi import APIRouter,Path, Query, Depends
 from pydantic import BaseModel, Field
 from fastapi.responses import  JSONResponse
@@ -14,7 +13,7 @@ from service.movie_cast import MovieCastService
 movie_cast_router = APIRouter()
 
 
-@movie_cast_router.get('/movie/{id_movie}/cast/', tags=['cast'],response_model=list[MovieCast],status_code=200)
+@movie_cast_router.get('/movie/{id_movie}/cast/', tags=['cast'],status_code=200)
 def get_movie_cast(id_movie:int = Path(ge=1,le=2000)):
     db = Session()
     result = MovieCastService(db).get_movie_cast(id_movie)
