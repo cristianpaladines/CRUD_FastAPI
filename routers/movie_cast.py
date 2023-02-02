@@ -6,9 +6,9 @@ from fastapi.encoders import jsonable_encoder
 
 
 from config.database import Session
-from schemas.movie_cast import MovieCast
+from schemas.moviecast import MovieCast
 from models.moviecast import MovieCast as MovieCastModel
-from service.movie_cast import MovieCastService
+from service.moviecast import MovieCastService
 
 
 movie_cast_router = APIRouter()
